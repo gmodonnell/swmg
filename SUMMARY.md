@@ -1,0 +1,76 @@
+# Table of contents
+
+* [Attack Notebook](README.md)
+
+## Pentest
+
+* [🔭 Enumeration](pentest/enumeration/README.md)
+  * [DNS Enum](pentest/enumeration/dns-enum.md)
+  * [Network Scanning](pentest/enumeration/network-scanning.md)
+  * [Web Enumeration](pentest/enumeration/web-enumeration.md)
+* [🧗 Foothold](pentest/foothold/README.md)
+  * [Bruteforcing](pentest/foothold/bruteforcing.md)
+  * [FTP](pentest/foothold/ftp.md)
+  * [LDAP](pentest/foothold/ldap.md)
+  * [💣 Payload Generation](pentest/foothold/payload-generation/README.md)
+    * [Platform Matching](pentest/foothold/payload-generation/platform-matching.md)
+    * [AV Evasion](pentest/foothold/payload-generation/av-evasion.md)
+    * [Garble AV Evasion](pentest/foothold/payload-generation/garble-av-evasion.md)
+  * [RDP](pentest/foothold/rdp.md)
+  * [SSH](pentest/foothold/ssh.md)
+  * [SMTP // IMAP // POP3](pentest/foothold/smtp-imap-pop3.md)
+  * [SMB // RPC](pentest/foothold/smb-rpc.md)
+  * [Social Engineering](pentest/foothold/social-engineering.md)
+  * [SNMP](pentest/foothold/snmp.md)
+  * [SQL](pentest/foothold/sql.md)
+  * [🐚 Shells](pentest/foothold/shells.md)
+  * [🕸 Web](pentest/foothold/web/README.md)
+    * [XSS // CSRF](pentest/foothold/web/xss-csrf.md)
+    * [File Inclusion (RFI, LFI, PHP)](pentest/foothold/web/file-inclusion-rfi-lfi-php.md)
+    * [File Upload Vulnerabilities](pentest/foothold/web/file-upload-vulnerabilities.md)
+    * [SQL Injection](pentest/foothold/web/sql-injection.md)
+* [🏆 PrivEsc](pentest/privesc/README.md)
+  * [🪟 Windows](pentest/privesc/windows/README.md)
+    * [Privilege Exploitation](pentest/privesc/windows/privilege-exploitation.md)
+    * [Abusing Service Misconfigurations](pentest/privesc/windows/abusing-service-misconfigurations/README.md)
+      * [Unquoted Service Paths](pentest/privesc/windows/abusing-service-misconfigurations/unquoted-service-paths.md)
+      * [Service Binary Hijacking](pentest/privesc/windows/abusing-service-misconfigurations/service-binary-hijacking.md)
+      * [DLL Hijacking](pentest/privesc/windows/abusing-service-misconfigurations/dll-hijacking.md)
+    * [Scheduled Tasks](pentest/privesc/windows/scheduled-tasks.md)
+  * [🐧 Linux](pentest/privesc/linux/README.md)
+    * [Kernel Exploits](pentest/privesc/linux/kernel-exploits.md)
+    * [Shared Object Hacking](pentest/privesc/linux/shared-object-hacking.md)
+    * [Common Abuses](pentest/privesc/linux/common-abuses.md)
+  * [🐘 PostgreSQL](pentest/privesc/postgresql.md)
+  * [🙀 Password Decryption](pentest/privesc/password-decryption.md)
+* [💰 Post Exploitation](pentest/post-exploitation/README.md)
+  * [Loot Locators](pentest/post-exploitation/loot-locators.md)
+  * [📁 File Transfer](pentest/post-exploitation/file-transfer.md)
+  * [😻 Mimikatz](pentest/post-exploitation/mimikatz.md)
+  * [🐕🦺 BloodHound AD](pentest/post-exploitation/bloodhound-ad.md)
+* [🧭 Pivoting](pentest/pivoting/README.md)
+  * [SSH Tunnels](pentest/pivoting/ssh-tunnels.md)
+  * [Chisel](pentest/pivoting/chisel.md)
+  * [Windows Pivots](pentest/pivoting/windows-pivots.md)
+* [🗃 Active Directory](pentest/active-directory/README.md)
+  * [AD Enum](pentest/active-directory/ad-enum.md)
+* [🎣 Phishing](pentest/phishing/README.md)
+  * [SocEng](pentest/phishing/soceng.md)
+
+## setup
+
+* [Setup](setup/setup.md)
+* [🔧 Toolbox](setup/toolbox.md)
+
+## misc
+
+* [Misc](misc/misc.md)
+* [SecureSHell](misc/secureshell.md)
+* [HyperText Transfer Protocol](misc/hypertext-transfer-protocol.md)
+* [PowerShell](misc/powershell.md)
+
+## Syntax Reference
+
+* [🐧 Linux](syntax-reference/linux.md)
+* [🧑🦯 Bash](syntax-reference/bash.md)
+* [🥅 Regex](syntax-reference/regex.md)
