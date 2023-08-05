@@ -94,4 +94,5 @@ These notebooks are good and I am pulling stuff from them if I use it enough.
 * [https://cheatsheetseries.owasp.org/](https://cheatsheetseries.owasp.org/)
 * xct's notes - [https://notes.vulndev.io/wiki/](https://notes.vulndev.io/wiki/)
 * Sliver Guide - [https://dominicbreuker.com/](https://dominicbreuker.com/)
+* More Notes - [https://exploit-notes.hdks.org](https://exploit-notes.hdks.org/)
 
