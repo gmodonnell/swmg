@@ -12,7 +12,7 @@ When working through a lab, I have to ssh into the box and use my tools through 
 
 Open BurpSuite, go to Project Options (or user options for a permanent change which I don't recommend). Under SOCKS proxy, enable everything and run the SOCKS proxy address as 127.0.0.1. _you can't put localhost_. Next you set the port to whatever you want your port to be. SSH into the box, and set the -D flag with your port matching the port you indicated in BurpSuite. Activate your Burp Proxy as usual. The traffic will flow from the browser through burp to your EC2 out into the world.
 
-### Forwarding
+## Forwarding
 
 Local port forwards are a good way to ensure a connection takes an unorthodox route if you're dodging firewalls or routing tools through an access point on an internal network. Local port forwards will take outgoing data from a local port, and connect it to a different port on the target box. Here is the general format:
 
@@ -39,6 +39,22 @@ Dynamic Port Forwards let you push all data from a client through to the target 
 > ```
 
 I don't X-11 forward for GUI applications because I don't know enough about it to run it securely.
+
+## \*THAT\* Forward
+
+The one that is always messing you up. You should put it somewhere more convenient later, or maybe just the act of recording it one final time will actually make the process stick.
+
+```
+====================         ====================         ====================
+|    Attacker      |   -->   |       Proxy      |   -->   |    Internal Env. |
+====================         ====================         ====================
+```
+
+| Device   | Command                                       | Reason                                                                               |
+| -------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Attacker | `ssh -L 8888::8888 proxyuser@proxy`           | Connect to proxy, bring port forward down to attacker                                |
+| Proxy    | `ssh -p 2222 -D 8888 internaluser@internal`   | Complete chain as middle link. Become SOCKS5 proxy for internal machine and attacker |
+| Internal | `ssh -N -R 2222:localhost:22 proxyuser@proxy` | Callback from Internal machine to proxy                                              |
 
 ## Git
 
