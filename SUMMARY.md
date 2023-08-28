@@ -47,7 +47,7 @@
   * [Loot Locators](pentest/post-exploitation/loot-locators.md)
   * [📁 File Transfer](pentest/post-exploitation/file-transfer.md)
   * [😻 Mimikatz](pentest/post-exploitation/mimikatz.md)
-  * [🐕🦺 🐕🦺 BloodHound AD](pentest/post-exploitation/bloodhound-ad.md)
+  * [🐕🦺 🐕🦺 🐕🦺 BloodHound AD](pentest/post-exploitation/bloodhound-ad.md)
 * [🧭 Pivoting](pentest/pivoting/README.md)
   * [SSH Tunnels](pentest/pivoting/ssh-tunnels.md)
   * [Chisel](pentest/pivoting/chisel.md)
@@ -72,5 +72,5 @@
 ## Syntax Reference
 
 * [🐧 Linux](syntax-reference/linux.md)
-* [🧑🦯 🧑🦯 Bash](syntax-reference/bash.md)
+* [🧑🦯 🧑🦯 🧑🦯 Bash](syntax-reference/bash.md)
 * [🥅 Regex](syntax-reference/regex.md)

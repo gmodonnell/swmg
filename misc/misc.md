@@ -22,7 +22,7 @@ sudo msfconsole -q -x "user exploit/multi/handler; set payload <payload>; set LH
 
 ## Screen Sessions
 
-Used for managing tasks remotely. &#x20;
+Used for managing tasks remotely.
 
 ```
 Create Session:
@@ -79,6 +79,9 @@ Things I want to check out but don't have the time to categorize
 * For a Project [https://github.com/attackdebris/auto-sslscan](https://github.com/attackdebris/auto-sslscan)
 * Yet another Windows CVE: [https://github.com/zoemurmure/CVE-2023-21554-PoC](https://github.com/zoemurmure/CVE-2023-21554-PoC)
 * Goodfellow Deep Learning: [https://www.deeplearningbook.org/](https://www.deeplearningbook.org/)
+* Threat Check (Defender Evasion): [https://github.com/rasta-mouse/ThreatCheck](https://github.com/rasta-mouse/ThreatCheck)
+* [https://github.com/h4wkst3r/InvisibilityCloak](https://github.com/h4wkst3r/InvisibilityCloak)
+* [https://github.com/TheD1rkMtr/FilelessPELoader](https://github.com/TheD1rkMtr/FilelessPELoader)
 
 ## Other People's Notes
 
@@ -87,12 +90,11 @@ These notebooks are good and I am pulling stuff from them if I use it enough.
 * [https://cheatsheet.haax.fr/](https://cheatsheet.haax.fr/)
 * The WebApp Notebook - [https://swisskyrepo.github.io/PayloadsAllTheThings](https://swisskyrepo.github.io/PayloadsAllTheThings)
 * Snovvcrash - [https://ppn.snovvcrash.rocks/](https://ppn.snovvcrash.rocks/)
-* Just this part of the notebook. (Rest is writeups): [https://manuelvazquez-contact.gitbook.io/oscp-prep/privelege-escalation/linux-privilege-escalation](https://manuelvazquez-contact.gitbook.io/oscp-prep/privelege-escalation/linux-privilege-escalation)&#x20;
+* Just this part of the notebook. (Rest is writeups): [https://manuelvazquez-contact.gitbook.io/oscp-prep/privelege-escalation/linux-privilege-escalation](https://manuelvazquez-contact.gitbook.io/oscp-prep/privelege-escalation/linux-privilege-escalation)
 * Yet another github.io - [https://martinkubecka.github.io/posts/thm/linux-privilege-escalation/](https://martinkubecka.github.io/posts/thm/linux-privilege-escalation/)
-* IRedTeam - [https://www.ired.team/](https://www.ired.team/)&#x20;
+* IRedTeam - [https://www.ired.team/](https://www.ired.team/)
 * Hacker Recipes - [https://www.thehacker.recipes/](https://www.thehacker.recipes/) (AND tools subdomain for mimikatz tips)
 * [https://cheatsheetseries.owasp.org/](https://cheatsheetseries.owasp.org/)
 * xct's notes - [https://notes.vulndev.io/wiki/](https://notes.vulndev.io/wiki/)
 * Sliver Guide - [https://dominicbreuker.com/](https://dominicbreuker.com/)
 * More Notes - [https://exploit-notes.hdks.org](https://exploit-notes.hdks.org/)
-
