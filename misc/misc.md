@@ -82,6 +82,7 @@ Things I want to check out but don't have the time to categorize
 * Threat Check (Defender Evasion): [https://github.com/rasta-mouse/ThreatCheck](https://github.com/rasta-mouse/ThreatCheck)
 * [https://github.com/h4wkst3r/InvisibilityCloak](https://github.com/h4wkst3r/InvisibilityCloak)
 * [https://github.com/TheD1rkMtr/FilelessPELoader](https://github.com/TheD1rkMtr/FilelessPELoader)
+* Fun Windows Setup - [https://academy.hackthebox.com/module/87/section/885](https://academy.hackthebox.com/module/87/section/885) (Also VPS Setup)
 
 ## Other People's Notes
 

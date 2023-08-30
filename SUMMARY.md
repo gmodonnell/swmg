@@ -65,6 +65,7 @@
 ## misc
 
 * [Network Trivia](misc/network-trivia.md)
+* [🔢 Cryptography Trivia](misc/cryptography-trivia.md)
 * [Misc](misc/misc.md)
 * [SecureSHell](misc/secureshell.md)
 * [HyperText Transfer Protocol](misc/hypertext-transfer-protocol.md)

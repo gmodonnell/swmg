@@ -62,3 +62,20 @@ Has a Network Prefix and an Interface Identifier. 128 bits long. The Interface I
 IPv6 Notation Explained
 {% endembed %}
 
+## VLANs
+
+You can filter VLAN traffic from a wireshark capture with the `vlan` filter. This is becuase all VLAN packets are shipped with a VLAN identification number. You can also do this in `tshark`:
+
+```bash
+tshark -r "capture.pcapng" -T fields -e vlan.id | sort -n -u
+```
+
+Additionally, you can hop and sniff other VLANs if Cisco's Dynamic Trunking Protocol (DTP) is enabled and you can physically access the switch with those settings.&#x20;
+
+{% hint style="info" %}
+There is a double-tagged VLAN hopping attack you can perform with Scapy or Yersinia that allows you to send data from one VLAN to a different VLAN.&#x20;
+{% endhint %}
+
+{% embed url="https://datatracker.ietf.org/doc/html/rfc7348" %}
+Data Centers us VXLAN&#x20;
+{% endembed %}
