@@ -96,4 +96,11 @@ Search Forward/Backward (pan with n):
 Append * or Delete char from every EOL:
 :%norm A*
 :%norm $d x
+
+Cut Word/Line, Copy Word/Line:
+dw dd yw yy
 ```
+
+{% embed url="https://vimsheet.com/" %}
+Swag
+{% endembed %}

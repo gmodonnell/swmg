@@ -38,7 +38,7 @@
       * [DLL Hijacking](pentest/privesc/windows/abusing-service-misconfigurations/dll-hijacking.md)
     * [Scheduled Tasks](pentest/privesc/windows/scheduled-tasks.md)
   * [🐧 Linux](pentest/privesc/linux/README.md)
-    * [Kernel Exploits](pentest/privesc/linux/kernel-exploits.md)
+    * [🍿 Kernel Exploits](pentest/privesc/linux/kernel-exploits.md)
     * [Shared Object Hacking](pentest/privesc/linux/shared-object-hacking.md)
     * [Common Abuses](pentest/privesc/linux/common-abuses.md)
   * [🐘 PostgreSQL](pentest/privesc/postgresql.md)
@@ -64,6 +64,7 @@
 
 ## misc
 
+* [Page](misc/page.md)
 * [Misc](misc/misc.md)
 * [SecureSHell](misc/secureshell.md)
 * [HyperText Transfer Protocol](misc/hypertext-transfer-protocol.md)
