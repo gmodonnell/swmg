@@ -8,8 +8,6 @@ description: Things you may or may not have known!
 
 There are multiple types of VPNs!
 
-
-
 {% tabs %}
 {% tab title="Site-To-Site" %}
 Site-To-Site is used to join networks, and both the client and server of the VPN are generally networking devices (routers, firewalls, etc)
@@ -24,11 +22,11 @@ SSL VPNs are browser based. They are used to stream applications or entire deskt
 {% endtab %}
 {% endtabs %}
 
+TCP 1723 is generally used for Point-to-Point Tunneling Protocol (PPTP) and UDP 500 is generally used for IKEv1 and IKEv2. These are common VPN connection protocols. VPNs typcially use Encapsulating Security Payload (ESP) to encrypt VPN traffic. PPTP is deprecated.&#x20;
+
 ## Proxies
 
 There are multiple types of proxies!
-
-
 
 {% tabs %}
 {% tab title="Dedicated/Forward Proxy" %}
@@ -42,10 +40,25 @@ Filters incoming requests. Reverse proxies listen on an address and foward the r
 
 Proxies can work transparently or non-transparently. Transparent proxies exist without the client's knowledge, but non-transparent proxies require the client to set up the connection.&#x20;
 
-## The Following Images are IP of HackTheBox
+## Packet Routing
+
+Images are IP of HackTheBox
 
 <figure><img src="https://academy.hackthebox.com/storage/modules/34/redesigned/net_models_pdu2.png" alt=""><figcaption><p>The Open Systems Interconnection, Transmission Control Protocol  and Protocol Data Unit Models</p></figcaption></figure>
 
 
 
 <figure><img src="https://academy.hackthebox.com/storage/modules/34/packet_transfer.png" alt=""><figcaption><p>Each layer of the OSI adds a header to the PDU to help route each packet</p></figcaption></figure>
+
+## MAC Addresses
+
+48 bits, the first 24 bits tell you the hardware manufacturer. The last bit of the first octet tells you if the MAC address is `unicast (0)` or `multicast (1)`. The MAC will be all 1's if it is a Broadcast device. The second to last bit of the first octet tells you if the MAC address is a `global OUI (0)` or `Locally Administrated (0)`. ARP is what resolves IPs to MACs.
+
+## IPv6
+
+Has a Network Prefix and an Interface Identifier. 128 bits long. The Interface Identifier is also called the suffix and is created by converting the 48 bit MAC into a 64 bit address.
+
+{% embed url="https://datatracker.ietf.org/doc/html/rfc5952" %}
+IPv6 Notation Explained
+{% endembed %}
+
