@@ -64,7 +64,7 @@
 
 ## misc
 
-* [Page](misc/page.md)
+* [Network Trivia](misc/network-trivia.md)
 * [Misc](misc/misc.md)
 * [SecureSHell](misc/secureshell.md)
 * [HyperText Transfer Protocol](misc/hypertext-transfer-protocol.md)
