@@ -30,11 +30,18 @@ wc:
 
 <details>
 <summary>cURL</summary>
+
 ```
 -O download webpage
 -s suppress output
 -k skip cert check (to navigate around invalid SSL)
+-v(vv) Verbosity, 3 Levels
+-I HEAD request, only headers
+-i Headers and Response
+-H custom header
+-A custom user-agent
 ```
+
 </details>
 
 | Code | Permissions     |
