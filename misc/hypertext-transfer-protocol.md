@@ -27,6 +27,7 @@ There are a number of response and request types used by HTTP to make the client
 >   TRACE - acks to client
 > OPTIONS - shows the HTTP methods supported by the server
 > CONNECT - pushes the connection upward to a secure environment
+>  DELETE - deletes an existing resource on the webserver
 >   PATCH - passes updates, rarely seen
 > ```
 
