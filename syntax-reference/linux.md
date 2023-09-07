@@ -28,6 +28,15 @@ wc:
 
 </details>
 
+<details>
+<summary>cURL</summary>
+```
+-O download webpage
+-s suppress output
+-k skip cert check (to navigate around invalid SSL)
+```
+</details>
+
 | Code | Permissions     |
 | ---- | --------------- |
 | 0    | No Permission   |
