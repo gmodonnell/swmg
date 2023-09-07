@@ -40,6 +40,10 @@ wc:
 -i Headers and Response
 -H custom header
 -A custom user-agent
+-u credentials in user:pass format
+-X Specify Method
+-d POST data
+-b provide cookie
 ```
 
 </details>
