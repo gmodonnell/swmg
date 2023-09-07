@@ -9,6 +9,12 @@ HTTP/S is a Layer 5 Protocol. It is the most prominent Layer 5 protocol in terms
 
 HTTP/S files are structured text files served from a node containing logical links to other nodes containing more structured text files. HTTP handles most of our web traffic, and is the protocol we rely on to deliver HyperText Markup Language (HTML) to clients. HTTP can also deliver files of most any type. Multiple connections can be opened on the same device if you want higher throughput or a variety of resources at once. Truly a great protocol. Tim Berners-Lee has a net worth of $10 million. Humanity has strayed from God's light.
 
+### URLs
+Format of URLs:
+![URL Structure, HTB Academy](https://academy.hackthebox.com/storage/modules/35/url_structure.png)
+
+Web requests need a DNS server to translate URLs to IP addresses, where the requests are routed and from which the content is served. DNS servers are not required if a manual entry is added in ```/etc/hosts```. This file exists on Linux and Windows. On Windows it is located at ```%SystemRoot%\System32\drivers\etc\hosts```.
+
 #### Response and Request Types
 
 There are a number of response and request types used by HTTP to make the client/server negotiation run smoothly. Request types are issued from the client to the webserver.
