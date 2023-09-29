@@ -32,6 +32,9 @@ tar -xvf impacket-0.10.0.tar
 git clone https://github.com/r3motecontrol/Ghostpack-CompiledBinaries
 git clone https://github.com/FuzzySecurity/PowerShell-Suite
 git clone https://github.com/PowerShellMafia/PowerSploit
+git clone https://github.com/Pennyw0rth/NetExec
+git clone https://github.com/RedSiege/EyeWitness
+git clone https://github.com/powerline/powerline
 
 #gems
 gem install evil-winrm
