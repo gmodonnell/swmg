@@ -8,7 +8,7 @@ description: Tools go here. Figuring out how to connect it to github repo in the
 ```
 #apt install tools
 sudo apt update && sudo apt upgrade
-sudo apt install -y redshift feroxbuster proxychains4 snmp xfreerdp flameshot mingw-w64
+sudo apt install -y redshift feroxbuster proxychains4 snmp xfreerdp flameshot mingw-w64 ruby
 
 #python tools
 pip install pipx 
@@ -29,12 +29,14 @@ wget https://github.com/SecureAuthCorp/impacket/releases/download/impacket_0_10_
 wget https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mimikatz_trunk.7z
 gunzip impacket-0.10.0.tar.gz
 tar -xvf impacket-0.10.0.tar
+wget https://raw.githubusercontent.com/BornToBeRoot/PowerShell_IPv4PortScanner/main/Scripts/IPv4PortScan.ps1 -o PSPortScan.ps1
 git clone https://github.com/r3motecontrol/Ghostpack-CompiledBinaries
 git clone https://github.com/FuzzySecurity/PowerShell-Suite
 git clone https://github.com/PowerShellMafia/PowerSploit
 git clone https://github.com/Pennyw0rth/NetExec
 git clone https://github.com/RedSiege/EyeWitness
 git clone https://github.com/powerline/powerline
+git clone https://github.com/SpiderLabs/Responder
 
 #gems
 gem install evil-winrm
