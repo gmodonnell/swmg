@@ -53,6 +53,7 @@
   * [Chisel](pentest/pivoting/chisel.md)
   * [Windows Pivots](pentest/pivoting/windows-pivots.md)
 * [🗃 Active Directory](pentest/active-directory/README.md)
+  * [Management One-Liners](pentest/active-directory/management-one-liners.md)
   * [AD Enum](pentest/active-directory/ad-enum.md)
 * [🎣 Phishing](pentest/phishing/README.md)
   * [SocEng](pentest/phishing/soceng.md)
