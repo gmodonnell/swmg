@@ -102,6 +102,7 @@ These notebooks are good and I am pulling stuff from them if I use it enough.
 * Sliver Guide - [https://dominicbreuker.com/](https://dominicbreuker.com/)
 * More Notes - [https://exploit-notes.hdks.org](https://exploit-notes.hdks.org/)
 * Learning Resources (Open Courses) - [https://github.com/eric-erki/awesome-courses](https://github.com/eric-erki/awesome-courses)
+* Windows Commands -[https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands)
 
 ## Gear 
 * [Travel Router](https://www.gl-inet.com/products/gl-mt1300/)
