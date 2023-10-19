@@ -1,5 +1,11 @@
 ---
+title: network-trivia
 description: Things you may or may not have known!
+published: true
+date: 2023-10-19T23:17:56.811Z
+tags: 
+editor: markdown
+dateCreated: 2023-10-19T16:28:54.580Z
 ---
 
 # Network Trivia
@@ -49,6 +55,8 @@ Images are IP of HackTheBox
 
 
 <figure><img src="https://academy.hackthebox.com/storage/modules/34/packet_transfer.png" alt=""><figcaption><p>Each layer of the OSI adds a header to the PDU to help route each packet</p></figcaption></figure>
+
+If you clear out the routing table of a router shit gets really weird really fast.
 
 ## MAC Addresses
 
