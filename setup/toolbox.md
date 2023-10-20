@@ -1,5 +1,11 @@
 ---
+title: toolbox
 description: Tools go here. Figuring out how to connect it to github repo in the future.
+published: true
+date: 2023-10-20T02:20:45.113Z
+tags: 
+editor: markdown
+dateCreated: 2023-10-19T16:29:26.945Z
 ---
 
 # 🔧 Toolbox
@@ -44,10 +50,12 @@ gem install evil-winrm
 ```
 {% endcode %}
 
-{% embed url="https://www.monodevelop.com/download/#fndtn-download-lin-debian" %}
-MonoDevelop to Compile .sln files on linux with xbuild
-{% endembed %}
+[MonoDevelop to Compile .sln files on linux with xbuild](https://www.monodevelop.com/download/#fndtn-download-lin-debian)
 
-{% embed url="https://github.com/RustScan/RustScan/wiki/Installation-Guide" %}
-Installing Rust (maybe)
-{% endembed %}
+[Rust Install](https://github.com/RustScan/RustScan/wiki/Installation-Guide)
+
+[Password Spray VMWare Horizon](https://github.com/leitosama/BruteMeTheHorizon)
+
+[PsMapExec](https://github.com/The-Viper-One/PsMapExec)
+
+[Living off the Land sc.exe SDDL Translation](https://github.com/qtc-de/wconv#parse-sddl)
