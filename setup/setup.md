@@ -1,5 +1,11 @@
 ---
+title: setup
 description: Setting things up
+published: true
+date: 2023-10-24T22:50:36.978Z
+tags: 
+editor: markdown
+dateCreated: 2023-10-19T16:29:20.411Z
 ---
 
 # Setup
@@ -101,6 +107,4 @@ Cut Word/Line, Copy Word/Line:
 dw dd yw yy
 ```
 
-{% embed url="https://vimsheet.com/" %}
-Swag
-{% endembed %}
+* [Vim Cheat Sheet](https://vimsheet.com/)
