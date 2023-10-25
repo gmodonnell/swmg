@@ -10,7 +10,7 @@ dateCreated: 2023-10-19T16:29:26.945Z
 
 # 🔧 Toolbox
 
-{% code fullWidth="true" %}
+
 ```
 #apt install tools
 sudo apt update && sudo apt upgrade
@@ -48,7 +48,7 @@ git clone https://github.com/SpiderLabs/Responder
 #gems
 gem install evil-winrm
 ```
-{% endcode %}
+
 
 [MonoDevelop to Compile .sln files on linux with xbuild](https://www.monodevelop.com/download/#fndtn-download-lin-debian)
 
@@ -59,3 +59,5 @@ gem install evil-winrm
 [PsMapExec](https://github.com/The-Viper-One/PsMapExec)
 
 [Living off the Land sc.exe SDDL Translation](https://github.com/qtc-de/wconv#parse-sddl)
+
+Consider Lynis linux auditor https://github.com/CISOfy/Lynis
