@@ -2,7 +2,7 @@
 title: setup
 description: Setting things up
 published: true
-date: 2023-10-24T22:50:36.978Z
+date: 2023-11-17T17:15:05.464Z
 tags: 
 editor: markdown
 dateCreated: 2023-10-19T16:29:20.411Z
@@ -45,6 +45,25 @@ Dynamic Port Forwards let you push all data from a client through to the target 
 > ```
 
 I don't X-11 forward for GUI applications because I don't know enough about it to run it securely.
+
+### BurpSuite Extensions
+You should have the following extensions installed on BurpSuite if you're going to be using it for any kind of serious work:
+
+* 403 Bypasser
+* Active Scan ++
+* Autorize
+* Freddy Deserialization Finder
+* GraphQL Raider
+* InQL - GraphQL Scanner
+* Java Deserialization Scanner
+* JWT Editor
+* Log4Shell Everywhere
+* Log4Shell Scanner
+* PDF Viewer
+* Retire.js
+* Site Map Extractor
+* ViewState Editor
+* .NET Beautifier
 
 ## \*THAT\* Forward
 
