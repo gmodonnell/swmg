@@ -2,7 +2,7 @@
 title: setup
 description: Setting things up
 published: true
-date: 2023-11-17T17:15:05.464Z
+date: 2023-12-21T20:29:25.346Z
 tags: 
 editor: markdown
 dateCreated: 2023-10-19T16:29:20.411Z
@@ -77,7 +77,7 @@ The one that is always messing you up. You should put it somewhere more convenie
 
 | Device   | Command                                       | Reason                                                                               |
 | -------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
-| Attacker | `ssh -L 8888::8888 proxyuser@proxy`           | Connect to proxy, bring port forward down to attacker                                |
+| Attacker | `ssh -L 8888:localhost:8888 proxyuser@proxy`           | Connect to proxy, bring port forward down to attacker                                |
 | Proxy    | `ssh -p 2222 -D 8888 internaluser@internal`   | Complete chain as middle link. Become SOCKS5 proxy for internal machine and attacker |
 | Internal | `ssh -N -R 2222:localhost:22 proxyuser@proxy` | Callback from Internal machine to proxy                                              |
 
