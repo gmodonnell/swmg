@@ -67,4 +67,13 @@ Then run `docker build -t LABEL` and give it a good name so you know what you're
 | `docker rm/rmi` | remove container/image |
 | `docker logs` | view container logs |
 
-You can also use a utility known as `lxc` to containerize things. 
+## Docker Update and Use
+To update an image: `docker pull image/image`
+
+To run the image: `docker run --rm -it -p <PORT>:<PORT> -v <local_folder>:<container_folder> image/image`
+rm will make sure the shit cleans itself, it gives you an interactive shell when the container spins up and
+v shares a folder between the host and the container.
+
+You can also use a utility known as `lxc` to containerize things.
+
+ 
