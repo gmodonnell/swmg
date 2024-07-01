@@ -1,5 +1,11 @@
 ---
+title: bash
 description: Jesus Christ it's Jason Bourne Again Shell
+published: true
+date: 2024-07-01T18:28:42.246Z
+tags: 
+editor: markdown
+dateCreated: 2023-10-19T16:29:33.242Z
 ---
 
 # 🧑🦯 Bash
@@ -74,6 +80,9 @@ foo(){
 }
 foo
 ```
+
+### While Loop 1Liner
+`while [ condition ]; do commands; done < input`
 
 ## Operations
 
