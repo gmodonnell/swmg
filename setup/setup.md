@@ -81,6 +81,8 @@ The one that is always messing you up. You should put it somewhere more convenie
 | Proxy    | `ssh -p 2222 -D 8888 internaluser@internal`   | Complete chain as middle link. Become SOCKS5 proxy for internal machine and attacker |
 | Internal | `ssh -N -R 2222:localhost:22 proxyuser@proxy` | Callback from Internal machine to proxy                                              |
 
+You will need to add an ssh key to the internal box using `ssh-keygen -t ecdsa -b 512 -C "email@domain.com"` and then copy the pub into your proxy machine's `authorized_keys` file.
+
 ## Git
 
 ```
