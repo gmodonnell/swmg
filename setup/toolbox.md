@@ -43,7 +43,7 @@ git clone https://github.com/PowerShellMafia/PowerSploit
 git clone https://github.com/Pennyw0rth/NetExec
 git clone https://github.com/RedSiege/EyeWitness
 git clone https://github.com/powerline/powerline
-git clone https://github.com/SpiderLabs/Responder
+git clone https://github.com/lgandx/Responder
 
 #gems
 gem install evil-winrm
