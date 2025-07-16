@@ -3,7 +3,7 @@ title: toolbox
 description: Tools go here. Figuring out how to connect it to github repo in the future.
 published: true
 date: 2023-10-20T02:20:45.113Z
-tags: 
+tags:
 editor: markdown
 dateCreated: 2023-10-19T16:29:26.945Z
 ---
@@ -17,7 +17,7 @@ sudo apt update && sudo apt upgrade
 sudo apt install -y redshift feroxbuster proxychains4 snmp xfreerdp flameshot mingw-w64 ruby
 
 #python tools
-pip install pipx 
+pip install pipx
 pipx install git-dumper crackmapexec pwn
 wget https://nmap.org/dist/ncat-portable-5.59BETA1.zip ncat.exe.zip
 unzip ncat.exe.zip
@@ -44,6 +44,8 @@ git clone https://github.com/Pennyw0rth/NetExec
 git clone https://github.com/RedSiege/EyeWitness
 git clone https://github.com/powerline/powerline
 git clone https://github.com/lgandx/Responder
+git clone https://github.com/gmodonnell/LazyHacker
+git clone https://github.com/ropnop/kerbrute
 
 #gems
 gem install evil-winrm

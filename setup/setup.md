@@ -3,7 +3,7 @@ title: setup
 description: Setting things up
 published: true
 date: 2023-12-21T20:29:25.346Z
-tags: 
+tags:
 editor: markdown
 dateCreated: 2023-10-19T16:29:20.411Z
 ---
@@ -81,7 +81,7 @@ The one that is always messing you up. You should put it somewhere more convenie
 | Proxy    | `ssh -p 2222 -D 8888 internaluser@internal`   | Complete chain as middle link. Become SOCKS5 proxy for internal machine and attacker |
 | Internal | `ssh -N -R 2222:localhost:22 proxyuser@proxy` | Callback from Internal machine to proxy                                              |
 
-You will need to add an ssh key to the internal box using `ssh-keygen -t ecdsa -b 512 -C "email@domain.com"` and then copy the pub into your proxy machine's `authorized_keys` file.
+You will need to add an ssh key to the internal box using `ssh-keygen -t ecdsa -b 521 -C "email@domain.com"` and then copy the pub into your proxy machine's `authorized_keys` file.
 
 ## Git
 
@@ -109,6 +109,19 @@ git remote set-url [remote name] [remote url]
 
 The `[remote name]` is usually `origin` or `main`, and the `[remote url]` is in the format `git@github.com/[author]/[repo]`.
 
+## Python Environments
+```
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+sudo -E python3 ./script.py
+`- sudo $(which python3) ./script.py
+```
+
+The `sudo -E` preserves the environment so you don't get fuckass errors about the
+packages not being there. If that doesn't work, force the absolute path with the
+alternative option provided.
+
 ## Vim Shortcuts
 
 ```
@@ -117,8 +130,8 @@ Toggle Line #
 :set nonumber
 
 Search Forward/Backward (pan with n):
-/<term> 
-?<term> 
+/<term>
+?<term>
 
 Append * or Delete char from every EOL:
 :%norm A*
