@@ -36,7 +36,6 @@ wget https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mim
 gunzip impacket-0.10.0.tar.gz
 tar -xvf impacket-0.10.0.tar
 wget https://raw.githubusercontent.com/BornToBeRoot/PowerShell_IPv4PortScanner/main/Scripts/IPv4PortScan.ps1 -o PSPortScan.ps1
-wget https://raw.githubusercontent.com/21y4d/nmapAutomator/master/nmapAutomator.sh
 git clone https://github.com/r3motecontrol/Ghostpack-CompiledBinaries
 git clone https://github.com/FuzzySecurity/PowerShell-Suite
 git clone https://github.com/PowerShellMafia/PowerSploit
