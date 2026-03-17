@@ -18,7 +18,8 @@ sudo apt install -y redshift feroxbuster proxychains4 snmp xfreerdp flameshot mi
 
 #python tools
 pip install pipx
-pipx install git-dumper crackmapexec pwn
+pipx install git-dumper pwn
+pipx install git+https://github.com/blacklanternsecurity/TREVORspray
 wget https://nmap.org/dist/ncat-portable-5.59BETA1.zip ncat.exe.zip
 unzip ncat.exe.zip
 
