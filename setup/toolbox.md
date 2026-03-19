@@ -46,6 +46,8 @@ git clone https://github.com/powerline/powerline
 git clone https://github.com/lgandx/Responder
 git clone https://github.com/gmodonnell/LazyHacker
 git clone https://github.com/ropnop/kerbrute
+git clone https://github.com/topotam/PetitPotam/
+git clone https://github.com/AD-Security/AD_Miner
 
 #gems
 gem install evil-winrm
