@@ -18,7 +18,8 @@ sudo apt install -y redshift feroxbuster proxychains4 snmp xfreerdp flameshot mi
 
 #python tools
 pip install pipx
-pipx install git-dumper crackmapexec pwn
+pipx install git-dumper pwn
+pipx install git+https://github.com/blacklanternsecurity/TREVORspray
 wget https://nmap.org/dist/ncat-portable-5.59BETA1.zip ncat.exe.zip
 unzip ncat.exe.zip
 
@@ -36,7 +37,6 @@ wget https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mim
 gunzip impacket-0.10.0.tar.gz
 tar -xvf impacket-0.10.0.tar
 wget https://raw.githubusercontent.com/BornToBeRoot/PowerShell_IPv4PortScanner/main/Scripts/IPv4PortScan.ps1 -o PSPortScan.ps1
-wget https://raw.githubusercontent.com/21y4d/nmapAutomator/master/nmapAutomator.sh
 git clone https://github.com/r3motecontrol/Ghostpack-CompiledBinaries
 git clone https://github.com/FuzzySecurity/PowerShell-Suite
 git clone https://github.com/PowerShellMafia/PowerSploit

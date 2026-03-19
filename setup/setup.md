@@ -83,6 +83,10 @@ The one that is always messing you up. You should put it somewhere more convenie
 
 You will need to add an ssh key to the internal box using `ssh-keygen -t ecdsa -b 521 -C "email@domain.com"` and then copy the pub into your proxy machine's `authorized_keys` file.
 
+Put `-o ServerAliveInterval=60 -o ServerAliveCountMax=3` in
+the Internal command to prevent broken pipe issues when you go to
+sleep.
+
 ## Git
 
 ```
