@@ -56,6 +56,7 @@ You should have the following extensions installed on BurpSuite if you're going 
 * ViewState Editor
 * .NET Beautifier
 * Param Miner
+* Hackvertor
 
 ## \*THAT\* Forward
 
