@@ -89,7 +89,7 @@ What makes the proof zero-knowledge is that the Verifier can
 only compute the same things after the interaction that they
 could have generated before the interaction.
 
-## The Simulation Paradigm
+### The Simulation Paradigm
 
 *V*'s view gives them nothing new. If they could have simulated
 their own proof, the simulated and real views should be
@@ -98,7 +98,7 @@ and comparing them to real ones can *at best* get it down to
 50/50 in determining which one is real and which one is
 simulated.
 
-## Zero Knowledge Defined
+### Zero Knowledge Defined
 
 An Interactive Protocol (*P*,*V*) is zero knowledge for a
 language *L* if for every **PPT** there exists a simulator
@@ -120,5 +120,9 @@ There are multiple flavors of Zero Knowledge:
 * Perfectly Identical (PZK)
 * Statistically Close (SZK)
 
-PZK is a special case where the verifier's view can be
-efficiently simulated exactly.
+PZK is a special case where the verifier's view 
+can be efficiently simulated exactly.
+
+All NP Languages have Zero Knowledge Interactive
+Proofs. If one-way functions exist, every L in NP
+has CZK ZKIP.
